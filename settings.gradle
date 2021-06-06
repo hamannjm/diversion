@@ -1,0 +1,2 @@
+rootProject.name = "In Pursuit of Diversion"
+include ':app'
