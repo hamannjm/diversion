@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
     buildFeatures {
         dataBinding
     }
@@ -33,6 +36,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    configurations.all {
+        resolutionStrategy {
+            exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+
+        }
     }
 }
 
@@ -48,11 +57,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
 
     //Fragments
     implementation "androidx.fragment:fragment-ktx:$versions.fragment"
     androidTestImplementation "androidx.fragment:fragment-testing:$versions.fragment"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
     //Architecture
     implementation "androidx.arch.core:core-runtime:$versions.arch_core"
@@ -68,6 +82,8 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
 
     implementation"androidx.paging:paging-runtime-ktx:3.0.0"
 
